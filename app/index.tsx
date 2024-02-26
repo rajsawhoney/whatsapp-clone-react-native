@@ -1,21 +1,33 @@
-import React from 'react';
-import { View, Text, Image, StyleSheet, TouchableOpacity, Linking } from 'react-native';
-import Colors from '@/constants/Colors';
-import { Link } from 'expo-router';
-import welcomeImage from '@/assets/images/welcome.png';
+import React, { useEffect } from "react";
+import {
+  View,
+  Text,
+  Image,
+  StyleSheet,
+  TouchableOpacity,
+  Linking,
+} from "react-native";
+import Colors from "@/constants/Colors";
+import { Link, router } from "expo-router";
+import welcomeImage from "@/assets/images/welcome.png";
 const welcome_image = Image.resolveAssetSource(welcomeImage).uri;
 
 const WelcomeScreen = () => {
   const openLink = () => {
-    Linking.openURL('https://galaxies.dev');
+    Linking.openURL("https://galaxies.dev");
   };
 
+  useEffect(() => {
+    setTimeout(() => {
+      router.replace("/(tabs)/settings/");
+    }, 500);
+  }, []);
   return (
     <View style={styles.container}>
       <Image source={{ uri: welcome_image }} style={styles.welcome} />
       <Text style={styles.headline}>Welcome to WhatsApp Clone</Text>
       <Text style={styles.description}>
-        Read our{' '}
+        Read our{" "}
         <Text style={styles.link} onPress={openLink}>
           Privacy Policy
         </Text>
@@ -25,7 +37,7 @@ const WelcomeScreen = () => {
         </Text>
         .
       </Text>
-      <Link href={'/otp'} replace asChild>
+      <Link href={"/otp"} replace asChild>
         <TouchableOpacity style={styles.button}>
           <Text style={styles.buttonText}>Agree & Continue</Text>
         </TouchableOpacity>
@@ -37,25 +49,25 @@ const WelcomeScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
     padding: 20,
-    backgroundColor: '#fff',
+    backgroundColor: "#fff",
   },
   welcome: {
-    width: '100%',
+    width: "100%",
     height: 300,
     borderRadius: 60,
     marginBottom: 80,
   },
   headline: {
     fontSize: 24,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     marginVertical: 20,
   },
   description: {
     fontSize: 14,
-    textAlign: 'center',
+    textAlign: "center",
     marginBottom: 80,
     color: Colors.gray,
   },
@@ -63,13 +75,13 @@ const styles = StyleSheet.create({
     color: Colors.primary,
   },
   button: {
-    width: '100%',
-    alignItems: 'center',
+    width: "100%",
+    alignItems: "center",
   },
   buttonText: {
     color: Colors.primary,
     fontSize: 22,
-    fontWeight: '500',
+    fontWeight: "500",
   },
 });
 
